@@ -1,0 +1,29 @@
+package com.mindlink.forum.module.DTO;
+
+import com.mindlink.forum.module.Comment;
+import com.mindlink.forum.module.Like;
+import com.mindlink.forum.module.Post;
+import jakarta.persistence.CascadeType;
+import jakarta.persistence.Column;
+import jakarta.persistence.OneToMany;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
+import java.util.List;
+
+@Data
+@AllArgsConstructor
+@NoArgsConstructor
+public class UserCreateDto {
+
+    private Long id;
+
+    private String username;
+    private List<Post> posts;
+
+    private List<Like> likes;
+
+    private List<Comment> comments;
+
+}
