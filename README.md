@@ -60,11 +60,11 @@ The module follows a layered architecture to separate concerns and ensure scalab
 ## How to Run
 1. Clone the repository:
    ```bash
-   git clone https://github.com/yourusername/forum-module.git
+   git clone https://github.com/5alvh/Forum-Module---Version-1.0.0
    ```
 2. Navigate to the project directory:
    ```bash
-   cd forum-module
+   cd Forum-Module---Version-1.0.0
    ```
 3. Build and run the application using your preferred IDE or build tool (e.g., Maven, Gradle).
 4. Access the REST API documentation (if integrated with Swagger or similar tools).
