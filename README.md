@@ -131,11 +131,6 @@ We welcome contributions to improve the Forum Module! Please follow these steps:
 
 ---
 
-## License
-This project is licensed under the [MIT License](LICENSE).
-
----
-
 ## Contact
 For questions or feedback, feel free to reach out:
 - 📧 Email: salahidslhddnn@gmail.com / idslhddnn@gmail.com
