@@ -1,7 +1,9 @@
-# Forum Module - Version 1.0.0
+# Forum Module - Version 1.0.1
 
 ## Overview
-This is the initial release of the **Forum Module** for our application. The module allows users to interact through posts, comments, and likes. It also provides the foundational CRUD functionalities for user management and forum interactions. The data flow and design emphasize clean architecture, encapsulation, and adherence to best practices.
+This is the initial release of the Forum Module for our application. The module allows users to interact through posts, comments, and likes. It also provides the foundational CRUD functionalities for user management and forum interactions. The data flow and design emphasize clean architecture, encapsulation, and adherence to best practices.
+
+This release also includes a nearly finished like feature and addresses some bugs with the build plugins.
 
 ---
 
@@ -18,7 +20,9 @@ This is the initial release of the **Forum Module** for our application. The mod
 - Update and delete comments.
 
 ### Like Management (Coming Soon)
-- 👍 Likes for posts and comments will be managed in an upcoming update.
+- 👍 Like/Unlike functionality for posts.
+- Complete LikeController for managing likes.
+- Validation and exception handling are in progress.
 
 ---
 
@@ -60,11 +64,11 @@ The module follows a layered architecture to separate concerns and ensure scalab
 ## How to Run
 1. Clone the repository:
    ```bash
-   git clone https://github.com/5alvh/Forum-Module---Version-1.0.0
+   git clone https://github.com/5alvh/Mindlink-Forum.git
    ```
 2. Navigate to the project directory:
    ```bash
-   cd Forum-Module---Version-1.0.0
+   cd Mindlink-Forum
    ```
 3. Build and run the application using your preferred IDE or build tool (e.g., Maven, Gradle).
 4. Access the REST API documentation (if integrated with Swagger or similar tools).
@@ -94,18 +98,21 @@ Below is a summary of the available endpoints:
 - **PUT** `/comment/{id}`: Update a comment.
 - **DELETE** `/comment/{id}`: Delete a comment.
 
-### Like Endpoints 👍 (Coming Soon)
+### Like Endpoints 👍
+- **POST** `/likes/`: Like a post (with validation).
+- **GET** `/likes/{postId}`: Get all likes for a post.
+- **DELETE** `/likes/{postId}/{userId}:`: Unlike a post (with exception handling).
 
 ---
 
 ## Known Issues
-- The "likes" feature is not yet implemented.
 - User model is a temporary placeholder and may be extended in future updates.
+- Likes, Comments and Posts validation and exception handling need further refinement.
 
 ---
 
 ## Future Enhancements
-- Complete the implementation of the "likes" feature.
+- Complete exception handling and validation for Likes, Comments and Posts functionality.
 - Enhance user authentication and role-based access control.
 - Improve documentation with examples and Swagger integration.
 - Optimize database queries for scalability.
