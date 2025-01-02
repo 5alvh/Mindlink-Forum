@@ -1,4 +1,0 @@
-package com.mindlink.forum.models.DTO.LikesDtos;
-
-public class LikeCreateDto {
-}

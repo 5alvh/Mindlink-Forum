@@ -1,9 +1,0 @@
-package com.mindlink.forum.service;
-
-import com.mindlink.forum.modules.Like;
-import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.stereotype.Repository;
-
-@Repository
-public interface LikeService extends JpaRepository<Like, Long> {
-}
