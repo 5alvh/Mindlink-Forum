@@ -10,7 +10,6 @@ import java.util.List;
 @Mapper(componentModel = "spring")
 public interface CommentMapper {
 
-    CommentMapper INSTANCE = Mappers.getMapper(CommentMapper.class);
     CommentGetDto commentToCommentGetDto(Comment comment);
     List<CommentGetDto> commentsToCommentGetDtos(List<Comment> comments);
 }
