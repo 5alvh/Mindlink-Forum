@@ -7,7 +7,6 @@ import com.mindlink.forum.models.Like;
 import java.util.List;
 
 public interface LikeService {
-    LikeGetDto createLike(LikeCreateDto likeCreateDto);
     LikeGetDto likePost(LikeCreateDto likeCreateDto);
     void unlikePost(Long postId, Long userId);
     List<LikeGetDto> getLikesForPost(Long postId);

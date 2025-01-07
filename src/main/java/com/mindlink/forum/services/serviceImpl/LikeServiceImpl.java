@@ -3,6 +3,8 @@ package com.mindlink.forum.services.serviceImpl;
 import com.mindlink.forum.models.DTO.LikesDtos.LikeCreateDto;
 import com.mindlink.forum.models.DTO.LikesDtos.LikeGetDto;
 import com.mindlink.forum.models.Like;
+import com.mindlink.forum.models.Post;
+import com.mindlink.forum.models.User;
 import com.mindlink.forum.repositories.LikeRepository;
 import com.mindlink.forum.repositories.PostRepository;
 import com.mindlink.forum.repositories.UserRepository;
@@ -17,9 +19,9 @@ import java.util.stream.Collectors;
 
 @Service
 public class LikeServiceImpl implements LikeService {
-    private LikeRepository likeRepository;
-    private PostRepository postRepository;
-    private UserRepository userRepository;
+    private final LikeRepository likeRepository;
+    private final PostRepository postRepository;
+    private final UserRepository userRepository;
 
     @Autowired
     public LikeServiceImpl(LikeRepository likeRepository, PostRepository postRepository, UserRepository userRepository) {
@@ -27,30 +29,26 @@ public class LikeServiceImpl implements LikeService {
         this.postRepository = postRepository;
         this.userRepository = userRepository;
     }
-    @Override
-    public LikeGetDto createLike(LikeCreateDto likeCreateDto) {
-        return null;
-    }
 
     @Override
     public LikeGetDto likePost(LikeCreateDto likeCreateDto) {
-        if (!postRepository.existsById(likeCreateDto.getPostId())) {
-            throw new IllegalArgumentException("Post not found");
 
-        }
-        if (!userRepository.existsById(likeCreateDto.getUserId())) {
-            throw new IllegalArgumentException("User not found");
-        }
         if (likeRepository.existsByPostIdAndUserId(likeCreateDto.getPostId(), likeCreateDto.getUserId())) {
             throw new IllegalArgumentException("Post already liked by this user");
         }
 
+        Post post = postRepository.findById(likeCreateDto.getPostId())
+                .orElseThrow(()-> new IllegalArgumentException("Post not found"));
+
+        User user = userRepository.findById(likeCreateDto.getUserId())
+                .orElseThrow(()-> new IllegalArgumentException("User not found"));
+
         Like like = new Like();
-        like.setPost(postRepository.findById(likeCreateDto.getPostId()).get());
-        like.setUser(userRepository.findById(likeCreateDto.getUserId()).get());
+        like.setPost(post);
+        like.setUser(user);
         like.setLikedAt(LocalDateTime.now());
-        System.out.println("HOLAAAAAAAAX");
         Like savedLike = likeRepository.save(like);
+
         return new LikeGetDto(
                 savedLike.getId(),
                 savedLike.getLikedAt(),
@@ -62,13 +60,12 @@ public class LikeServiceImpl implements LikeService {
     @Transactional
     @Override
     public void unlikePost(Long postId, Long userId) {
-        System.out.println("Attempting to unlike postId: " + postId + ", userId: " + userId);
+
         if (!likeRepository.existsByPostIdAndUserId(postId, userId)) {
-            System.out.println("Like does not exist for postId: " + postId + ", userId: " + userId);
             throw new IllegalArgumentException("Like does not exist");
         }
+
         likeRepository.deleteByPostIdAndUserId(postId, userId);
-        System.out.println("Successfully unliked postId: " + postId + ", userId: " + userId);
     }
 
     @Override

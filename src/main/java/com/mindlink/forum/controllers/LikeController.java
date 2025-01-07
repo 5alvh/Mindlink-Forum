@@ -20,7 +20,7 @@ public class LikeController {
         this.likeService = likeService;
     }
 
-    @PostMapping("/")
+    @PostMapping
     public ResponseEntity<LikeGetDto> likePost(@RequestBody LikeCreateDto likeCreateDto) {
         try {
             return ResponseEntity.ok().body(likeService.likePost(likeCreateDto));
@@ -35,14 +35,10 @@ public class LikeController {
     public ResponseEntity<Void> unlikePost(@PathVariable Long postId, @PathVariable Long userId) {
         try {
             likeService.unlikePost(postId, userId);
-            System.out.println("1");
             return ResponseEntity.ok().build();
         } catch (IllegalArgumentException e) {
-            System.out.println("2");
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
         } catch (Exception e) {
-            System.out.println("3");
-            e.printStackTrace();
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
         }
     }
