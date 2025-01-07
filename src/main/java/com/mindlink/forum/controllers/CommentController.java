@@ -21,19 +21,21 @@ public class CommentController {
         this.commentService = commentService;
     }
 
-    @PostMapping("/")
+    @PostMapping
     public ResponseEntity<CommentGetDto> createComment(@RequestBody CommentCreateDto comment) {
         try{
+
             return ResponseEntity.ok().body(commentService.createComment(comment));
         }catch (Exception e){
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
         }
     }
 
-    @GetMapping("/")
+    @GetMapping
     public ResponseEntity<List<CommentGetDto>> getAllComments() {
         try {
-            return ResponseEntity.ok().body(commentService.getAllComments());
+            List<CommentGetDto> comments = commentService.getAllComments();
+            return ResponseEntity.ok(comments);
         } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
         }
@@ -42,7 +44,8 @@ public class CommentController {
     @GetMapping("/{id}")
     public ResponseEntity<CommentGetDto> getCommentById(@PathVariable Long id) {
         try {
-            return ResponseEntity.ok().body(commentService.getCommentById(id));
+            CommentGetDto comment = commentService.getCommentById(id);
+            return ResponseEntity.ok().body(comment);
         } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
         }
@@ -51,14 +54,15 @@ public class CommentController {
     @PutMapping("/{id}")
     public ResponseEntity<CommentGetDto> updateComment(@PathVariable Long id, @RequestBody CommentUpdateDto comment) {
         try {
-            return ResponseEntity.ok().body(commentService.updateComment(id, comment));
+            CommentGetDto updatedComment = commentService.updateComment(id, comment);
+            return ResponseEntity.ok().body(updatedComment);
         } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
         }
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<Void> deleteComment(@PathVariable Long id) {
+    public ResponseEntity<?> deleteComment(@PathVariable Long id) {
         try {
             commentService.deleteComment(id);
             return ResponseEntity.ok().build();
