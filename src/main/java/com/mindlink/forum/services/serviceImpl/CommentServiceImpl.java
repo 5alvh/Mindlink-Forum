@@ -1,5 +1,11 @@
 package com.mindlink.forum.services.serviceImpl;
 
+import java.time.LocalDateTime;
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
 import com.mindlink.forum.models.Comment;
 import com.mindlink.forum.models.DTO.CommentDtos.CommentCreateDto;
 import com.mindlink.forum.models.DTO.CommentDtos.CommentGetDto;
@@ -11,31 +17,23 @@ import com.mindlink.forum.repositories.PostRepository;
 import com.mindlink.forum.repositories.UserRepository;
 import com.mindlink.forum.services.CommentService;
 import com.mindlink.forum.utils.CommentMapper;
-import jakarta.transaction.Transactional;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
 
-import java.time.Clock;
-import java.time.LocalDateTime;
-import java.util.List;
-import java.util.Optional;
+import jakarta.transaction.Transactional;
 
 @Service
 public class CommentServiceImpl implements CommentService {
 
-    private final CommentRepository commentRepository;
-    private final PostRepository postRepository;
-    private final UserRepository userRepository;
-    private final CommentMapper commentMapper;
-    private final Clock clock;
+    private CommentRepository commentRepository;
+    private PostRepository postRepository;
+    private UserRepository userRepository;
+    private CommentMapper commentMapper;
 
     @Autowired
-    public CommentServiceImpl(CommentRepository commentRepository,PostRepository postRepository,UserRepository userRepository, CommentMapper commentMapper, Clock clock) {
+    public CommentServiceImpl(CommentRepository commentRepository,PostRepository postRepository,UserRepository userRepository, CommentMapper commentMapper) {
         this.commentRepository = commentRepository;
         this.postRepository = postRepository;
         this.userRepository = userRepository;
         this.commentMapper = commentMapper;
-        this.clock = clock;
     }
 
     @Override
@@ -52,7 +50,7 @@ public class CommentServiceImpl implements CommentService {
         commentEntity.setContent(comment.getContent());
         commentEntity.setPost(post);
         commentEntity.setUser(user);
-        commentEntity.setFechaCreacion(LocalDateTime.now(clock));
+        commentEntity.setFechaCreacion(LocalDateTime.now());
 
         Comment savedComment = commentRepository.save(commentEntity);
         return commentMapper.commentToCommentGetDto(savedComment);
@@ -68,7 +66,7 @@ public class CommentServiceImpl implements CommentService {
 
     @Override
     public List<CommentGetDto> getAllComments() {
-        return commentMapper.commentsToCommentGetDtos(commentRepository.findAll());
+        return commentMapper.commentsToCommentGetDto(commentRepository.findAll());
     }
 
     @Transactional
