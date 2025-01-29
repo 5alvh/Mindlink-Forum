@@ -12,6 +12,7 @@ import com.mindlink.forum.utils.PostMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.io.IOException;
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
@@ -31,12 +32,20 @@ public class PostServiceImpl implements PostService {
 
     @Override
     public PostGetDto createPost(PostCreateDto post) {
-        User user = userRepository.findById(post.getUserId()).get();
+
+        User user = userRepository.findById(post.getUserId())
+                .orElseThrow(() -> new RuntimeException("User not found with id: " + post.getUserId()));
+
         Post pst = new Post();
         pst.setTitle(post.getTitle());
         pst.setContent(post.getContent());
         pst.setFechaCreacion(LocalDateTime.now());
         pst.setCategoria(post.getCategoria());
+        try {
+            pst.setImage(post.getImage().getBytes());
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
         pst.setUser(user);
         return postMapper.postToPostGetDto(postRepository.save(pst));
     }
