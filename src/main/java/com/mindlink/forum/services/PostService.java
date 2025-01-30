@@ -1,8 +1,8 @@
 package com.mindlink.forum.services;
 
-import com.mindlink.forum.models.DTO.PostDtos.PostCreateDto;
-import com.mindlink.forum.models.DTO.PostDtos.PostGetDto;
-import com.mindlink.forum.models.DTO.PostDtos.PostUpdateDto;
+import com.mindlink.forum.models.dtos.PostDtos.PostCreateDto;
+import com.mindlink.forum.models.dtos.PostDtos.PostGetDto;
+import com.mindlink.forum.models.dtos.PostDtos.PostUpdateDto;
 
 import java.util.List;
 

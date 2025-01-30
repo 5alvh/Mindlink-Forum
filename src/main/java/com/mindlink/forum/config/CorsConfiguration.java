@@ -12,7 +12,7 @@ import java.io.IOException;
 
 @Component
 @Order(Ordered.HIGHEST_PRECEDENCE)
-public class WebConfig implements Filter {
+public class CorsConfiguration implements Filter {
 
 
     @Override

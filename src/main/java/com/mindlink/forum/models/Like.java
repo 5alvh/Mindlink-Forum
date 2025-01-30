@@ -1,5 +1,6 @@
 package com.mindlink.forum.models;
 
+import com.mindlink.forum.models.user.User;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;

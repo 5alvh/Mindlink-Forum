@@ -1,5 +1,6 @@
 package com.mindlink.forum.models;
 
+import com.mindlink.forum.models.user.User;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -38,9 +39,6 @@ public class Post {
     @Column(name = "categoria")
     private String categoria;
 
-    @Lob
-    @Column(name = "image", columnDefinition = "BLOB")
-    private byte[] image;
 
     @OneToMany(mappedBy = "post", cascade = CascadeType.ALL)
     private List<Like> likes = new ArrayList<>();

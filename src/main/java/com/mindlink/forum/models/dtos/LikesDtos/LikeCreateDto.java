@@ -1,4 +1,4 @@
-package com.mindlink.forum.models.DTO.LikesDtos;
+package com.mindlink.forum.models.dtos.LikesDtos;
 
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Positive;

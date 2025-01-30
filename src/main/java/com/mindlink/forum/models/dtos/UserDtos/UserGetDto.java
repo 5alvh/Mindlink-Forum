@@ -1,4 +1,4 @@
-package com.mindlink.forum.models.DTO.UserDtos;
+package com.mindlink.forum.models.dtos.UserDtos;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -11,9 +11,5 @@ public class UserGetDto {
 
     private Long id;
     private String username;
-    /*
-    *private List<Post> posts;
-    *private List<Like> likes;
-    *private List<Comment> comments;
-    */
+
 }

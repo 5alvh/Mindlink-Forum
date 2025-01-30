@@ -1,8 +1,8 @@
 package com.mindlink.forum.controllers;
 
-import com.mindlink.forum.models.dtos.UserDtos.UpdateUserDto;
-import com.mindlink.forum.models.dtos.UserDtos.UserCreateDto;
-import com.mindlink.forum.models.dtos.UserDtos.UserGetDto;
+import com.mindlink.forum.models.DTO.UserDtos.UpdateUserDto;
+import com.mindlink.forum.models.DTO.UserDtos.UserCreateDto;
+import com.mindlink.forum.models.DTO.UserDtos.UserGetDto;
 import com.mindlink.forum.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;

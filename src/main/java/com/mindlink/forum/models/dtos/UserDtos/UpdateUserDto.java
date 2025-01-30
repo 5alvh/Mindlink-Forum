@@ -1,4 +1,4 @@
-package com.mindlink.forum.models.DTO.UserDtos;
+package com.mindlink.forum.models.dtos.UserDtos;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -7,7 +7,7 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class UserCreateDto {
+public class UpdateUserDto {
 
     private String username;
 

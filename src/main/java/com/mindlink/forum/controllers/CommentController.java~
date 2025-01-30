@@ -1,8 +1,8 @@
 package com.mindlink.forum.controllers;
 
-import com.mindlink.forum.models.dtos.CommentDtos.CommentCreateDto;
-import com.mindlink.forum.models.dtos.CommentDtos.CommentGetDto;
-import com.mindlink.forum.models.dtos.CommentDtos.CommentUpdateDto;
+import com.mindlink.forum.models.DTO.CommentDtos.CommentCreateDto;
+import com.mindlink.forum.models.DTO.CommentDtos.CommentGetDto;
+import com.mindlink.forum.models.DTO.CommentDtos.CommentUpdateDto;
 import com.mindlink.forum.services.CommentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;

@@ -1,7 +1,7 @@
 package com.mindlink.forum.controllers;
 
-import com.mindlink.forum.models.DTO.LikesDtos.LikeCreateDto;
-import com.mindlink.forum.models.DTO.LikesDtos.LikeGetDto;
+import com.mindlink.forum.models.dtos.LikesDtos.LikeCreateDto;
+import com.mindlink.forum.models.dtos.LikesDtos.LikeGetDto;
 import com.mindlink.forum.services.LikeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;

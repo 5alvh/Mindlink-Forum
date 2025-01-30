@@ -1,4 +1,4 @@
-package com.mindlink.forum.models.DTO.CommentDtos;
+package com.mindlink.forum.models.dtos.CommentDtos;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

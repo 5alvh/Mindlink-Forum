@@ -1,10 +1,10 @@
 package com.mindlink.forum.services.serviceImpl;
 
-import com.mindlink.forum.models.DTO.LikesDtos.LikeCreateDto;
-import com.mindlink.forum.models.DTO.LikesDtos.LikeGetDto;
+import com.mindlink.forum.models.dtos.LikesDtos.LikeCreateDto;
+import com.mindlink.forum.models.dtos.LikesDtos.LikeGetDto;
 import com.mindlink.forum.models.Like;
 import com.mindlink.forum.models.Post;
-import com.mindlink.forum.models.User;
+import com.mindlink.forum.models.user.User;
 import com.mindlink.forum.repositories.LikeRepository;
 import com.mindlink.forum.repositories.PostRepository;
 import com.mindlink.forum.repositories.UserRepository;

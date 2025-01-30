@@ -1,4 +1,4 @@
-package com.mindlink.forum.models.DTO.PostDtos;
+package com.mindlink.forum.models.dtos.PostDtos;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

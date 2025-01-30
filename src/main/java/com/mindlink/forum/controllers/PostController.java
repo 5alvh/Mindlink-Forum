@@ -14,9 +14,9 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.mindlink.forum.models.DTO.PostDtos.PostCreateDto;
-import com.mindlink.forum.models.DTO.PostDtos.PostGetDto;
-import com.mindlink.forum.models.DTO.PostDtos.PostUpdateDto;
+import com.mindlink.forum.models.dtos.PostDtos.PostCreateDto;
+import com.mindlink.forum.models.dtos.PostDtos.PostGetDto;
+import com.mindlink.forum.models.dtos.PostDtos.PostUpdateDto;
 import com.mindlink.forum.services.PostService;
 
 @RestController
