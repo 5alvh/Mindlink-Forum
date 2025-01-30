@@ -6,7 +6,6 @@ import com.mindlink.forum.models.dtos.LikesDtos.LikeGetDto;
 import java.util.List;
 
 public interface LikeService {
-    LikeGetDto likePost(LikeCreateDto likeCreateDto);
-    void unlikePost(Long postId, Long userId);
+    void likePost(LikeCreateDto likeCreateDto);
     List<LikeGetDto> getLikesForPost(Long postId);
 }

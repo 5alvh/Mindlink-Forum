@@ -21,9 +21,10 @@ public class LikeController {
     }
 
     @PostMapping
-    public ResponseEntity<LikeGetDto> likePost(@RequestBody LikeCreateDto likeCreateDto) {
+    public ResponseEntity<?> likePost(@RequestBody LikeCreateDto likeCreateDto) {
         try {
-            return ResponseEntity.ok().body(likeService.likePost(likeCreateDto));
+            likeService.likePost(likeCreateDto);
+            return ResponseEntity.ok().build();
         } catch (IllegalArgumentException e) {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(null);
         } catch (Exception e) {
@@ -31,17 +32,6 @@ public class LikeController {
         }
     }
 
-    @DeleteMapping("/{postId}/{userId}")
-    public ResponseEntity<Void> unlikePost(@PathVariable Long postId, @PathVariable Long userId) {
-        try {
-            likeService.unlikePost(postId, userId);
-            return ResponseEntity.ok().build();
-        } catch (IllegalArgumentException e) {
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
-        } catch (Exception e) {
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
-        }
-    }
 
     @GetMapping("/{postId}")
     public ResponseEntity<List<LikeGetDto>> getLikesForPost(@PathVariable Long postId) {

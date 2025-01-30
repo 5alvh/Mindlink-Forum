@@ -15,6 +15,7 @@ import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
@@ -31,10 +32,10 @@ public class LikeServiceImpl implements LikeService {
     }
 
     @Override
-    public LikeGetDto likePost(LikeCreateDto likeCreateDto) {
+    public void likePost(LikeCreateDto likeCreateDto) {
 
         if (likeRepository.existsByPostIdAndUserId(likeCreateDto.getPostId(), likeCreateDto.getUserId())) {
-            throw new IllegalArgumentException("Post already liked by this user");
+            likeRepository.deleteByPostIdAndUserId(likeCreateDto.getPostId(), likeCreateDto.getUserId());
         }
 
         Post post = postRepository.findById(likeCreateDto.getPostId())
@@ -49,24 +50,9 @@ public class LikeServiceImpl implements LikeService {
         like.setLikedAt(LocalDateTime.now());
         Like savedLike = likeRepository.save(like);
 
-        return new LikeGetDto(
-                savedLike.getId(),
-                savedLike.getLikedAt(),
-                savedLike.getPost().getId(),
-                savedLike.getUser().getId()
-        );
+
     }
 
-    @Transactional
-    @Override
-    public void unlikePost(Long postId, Long userId) {
-
-        if (!likeRepository.existsByPostIdAndUserId(postId, userId)) {
-            throw new IllegalArgumentException("Like does not exist");
-        }
-
-        likeRepository.deleteByPostIdAndUserId(postId, userId);
-    }
 
     @Override
     public List<LikeGetDto> getLikesForPost(Long postId) {

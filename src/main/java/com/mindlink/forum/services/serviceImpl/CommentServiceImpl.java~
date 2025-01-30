@@ -100,6 +100,8 @@ public class CommentServiceImpl implements CommentService {
 
     @Override
     public List<CommentGetDto> getCommentsByPostId(Long postId) {
-        return toCommentGetDtoList(commentRepository.findByPostId(postId));
+        return commentRepository.findByPostId(postId)
+                .map(this::toCommentGetDtoList)
+                .orElseThrow(() -> new IllegalArgumentException("Comment not found with ID: "));
     }
 }

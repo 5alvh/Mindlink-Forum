@@ -1,5 +1,7 @@
 package com.mindlink.forum.controllers;
 
+import com.mindlink.forum.models.user.Doctor;
+import com.mindlink.forum.models.user.Patient;
 import com.mindlink.forum.models.user.userDtos.DoctorRegistrationRequest;
 import com.mindlink.forum.models.user.userDtos.LoginRequest;
 import com.mindlink.forum.models.user.userDtos.PatientRegistrationRequest;
@@ -14,13 +16,14 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping("/auth")
+@RequestMapping("/api/auth")
 public class AuthenticationController {
 
     private final AuthenticationManager authenticationManager;

@@ -3,4 +3,4 @@ spring.datasource.username=springstudent
 spring.datasource.password=springstudent
 spring.jpa.hibernate.ddl-auto=drop-and-create
 
-spring.mvc.servlet.path=/api/v1
+spring.mvc.servlet.path=/api

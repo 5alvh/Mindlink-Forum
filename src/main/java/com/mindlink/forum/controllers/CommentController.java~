@@ -70,9 +70,4 @@ public class CommentController {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
         }
     }
-
-    @GetMapping("/commentByPost/{postId}")
-    public List<CommentGetDto> getCommentsByPostId(@PathVariable Long postId){
-        return commentService.getCommentsByPostId(postId);
-    }
 }
