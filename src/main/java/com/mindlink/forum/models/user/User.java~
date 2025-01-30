@@ -31,7 +31,6 @@ public abstract class User implements UserDetails {
     @Enumerated(EnumType.STRING)
     private UserRole userRole;
     private LocalDate dateOfBirth;
-    @Enumerated(EnumType.STRING)
     private Gender gender;
 
     public User() {}

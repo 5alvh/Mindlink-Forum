@@ -1,5 +1,6 @@
 package com.mindlink.forum.models.user;
 
+import com.mindlink.forum.utils.Gender;
 import com.mindlink.forum.utils.UserRole;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Table;
@@ -19,8 +20,8 @@ public class Doctor extends User {
 
     public Doctor() {}
 
-    public Doctor(String firstName, String lastName, String password, LocalDate dateOfBirth, String gender, String specialization, String licenseNumber) {
-        super(firstName, lastName, password, UserRole.DOCTOR, dateOfBirth, gender);
+    public Doctor(String firstName, String lastName, String email, String password, LocalDate dateOfBirth, Gender gender, String specialization, String licenseNumber) {
+        super(firstName, lastName, email, password, UserRole.DOCTOR, dateOfBirth, gender);
         this.specialization = specialization;
         this.licenseNumber = licenseNumber;
     }

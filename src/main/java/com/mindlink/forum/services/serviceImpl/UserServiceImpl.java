@@ -1,75 +1,55 @@
 package com.mindlink.forum.services.serviceImpl;
 
-import com.mindlink.forum.models.dtos.UserDtos.UpdateUserDto;
-import com.mindlink.forum.models.dtos.UserDtos.UserCreateDto;
-import com.mindlink.forum.models.dtos.UserDtos.UserGetDto;
-import com.mindlink.forum.models.user.User;
+import com.mindlink.forum.models.user.Doctor;
+import com.mindlink.forum.models.user.Patient;
+import com.mindlink.forum.models.user.userDtos.DoctorRegistrationRequest;
+import com.mindlink.forum.models.user.userDtos.PatientRegistrationRequest;
 import com.mindlink.forum.repositories.UserRepository;
 import com.mindlink.forum.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
-
-import java.util.List;
-import java.util.Optional;
-import java.util.stream.Collectors;
 
 @Service
 public class UserServiceImpl implements UserService {
 
     private UserRepository userRepository;
+    private PasswordEncoder passwordEncoder;
 
     @Autowired
-    public UserServiceImpl(UserRepository userRepository) {
+    public UserServiceImpl(UserRepository userRepository,PasswordEncoder passwordEncoder) {
         this.userRepository = userRepository;
+        this.passwordEncoder = passwordEncoder;
     }
+    @Override
+    public void createPatient(PatientRegistrationRequest request) {
 
-    private UserGetDto toUserGetDto(User user) {
-        UserGetDto dto = new UserGetDto();
-        dto.setId(user.getId());
-        dto.setUsername(user.getUsername());
-        return dto;
-    }
+        Patient patient = new Patient(
+                request.getFirstName(),
+                request.getLastName(),
+                request.getEmail(),
+                passwordEncoder.encode(request.getPassword()),
+                request.getDateOfBirth(),
+                request.getGender()
+        );
 
-    private List<UserGetDto> toUserGetDtoList(List<User> users) {
-        return users.stream()
-                .map(this::toUserGetDto)
-                .collect(Collectors.toList());
+        userRepository.save(patient);
     }
 
     @Override
-    public UserGetDto createUser(UserCreateDto user) {
-        /*User userEntity = new User();
-        userEntity.setFirstName(user.getUsername());
-        User savedUser = userRepository.save(userEntity);
-        return toUserGetDto(savedUser); // Use manual conversion*/
-        return null;
-    }
+    public void createDoctor(DoctorRegistrationRequest request) {
 
-    @Override
-    public UserGetDto getUserById(Long id) {
-        Optional<User> user = userRepository.findById(id);
-        return user.map(this::toUserGetDto).orElse(null); // Use manual conversion
-    }
+        Doctor doctor = new Doctor(
+                request.getFirstName(),
+                request.getLastName(),
+                request.getEmail(),
+                passwordEncoder.encode(request.getPassword()),
+                request.getDateOfBirth(),
+                request.getGender(),
+                request.getSpecialization(),
+                request.getLicenseNumber()
+        );
 
-    @Override
-    public List<UserGetDto> getAllUsers() {
-        List<User> users = userRepository.findAll();
-        return toUserGetDtoList(users); // Use manual conversion
-    }
-
-    @Override
-    public UserGetDto updateUser(Long id, UpdateUserDto userDto) {
-        Optional<User> userToUpdate = userRepository.findById(id);
-        if (userToUpdate.isPresent()) {
-            userToUpdate.get().setUsername(userDto.getUsername());
-            User updatedUser = userRepository.save(userToUpdate.get());
-            return toUserGetDto(updatedUser); // Use manual conversion
-        }
-        return null;
-    }
-
-    @Override
-    public void deleteUser(Long id) {
-        userRepository.deleteById(id);
+        userRepository.save(doctor);
     }
 }
