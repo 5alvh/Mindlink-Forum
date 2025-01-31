@@ -23,7 +23,8 @@ import com.mindlink.forum.services.PostService;
 @RequestMapping("/blog")
 public class PostController {
 
-    PostService postService;
+    private final PostService postService;
+
     @Autowired
     public PostController(PostService postService) {
         this.postService = postService;
@@ -31,49 +32,32 @@ public class PostController {
 
     @PostMapping("/createPost")
     public ResponseEntity<PostGetDto> createPost(@RequestBody PostCreateDto postDto) {
-        try {
-            return ResponseEntity.ok().body(postService.createPost(postDto));
-        } catch (Exception e) {
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
-        }
+        PostGetDto createdPost = postService.createPost(postDto);
+        return ResponseEntity.status(HttpStatus.CREATED).body(createdPost);
     }
 
     @GetMapping("/")
     public ResponseEntity<List<PostGetDto>> getAllPosts() {
-        try {
-            return ResponseEntity.ok().body(postService.getAllPosts());
-        } catch (Exception e) {
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
-        }
+        List<PostGetDto> posts = postService.getAllPosts();
+        return ResponseEntity.ok().body(posts);
     }
 
     @GetMapping("/{id}")
     public ResponseEntity<PostGetDto> getPostById(@PathVariable Long id) {
-        try {
-            return ResponseEntity.ok().body(postService.getPostById(id));
-        } catch (Exception e) {
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
-        }
+        PostGetDto post = postService.getPostById(id);
+        return ResponseEntity.ok().body(post);
     }
 
     @PutMapping("/{postId}")
     public ResponseEntity<PostGetDto> updatePost(@PathVariable Long postId, @RequestBody PostUpdateDto postDto) {
-        try {
-            return ResponseEntity.ok().body(postService.updatePost(postId, postDto));
-        } catch (Exception e) {
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
-        }
+        PostGetDto updatedPost = postService.updatePost(postId, postDto);
+        return ResponseEntity.ok().body(updatedPost);
     }
 
     @DeleteMapping("/{postId}")
     public ResponseEntity<Void> deletePost(@PathVariable Long postId) {
-        try {
-            postService.deletePost(postId);
-            return ResponseEntity.ok().build();
-        }catch (Exception e) {
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
-        }
+        postService.deletePost(postId);
+        return ResponseEntity.noContent().build();
     }
-
-
 }
+

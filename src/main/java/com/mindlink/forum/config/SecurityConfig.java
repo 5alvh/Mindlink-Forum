@@ -15,6 +15,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 import org.springframework.security.web.SecurityFilterChain;
+import java.util.Collections;
 
 @Configuration
 @EnableWebSecurity
@@ -35,16 +36,16 @@ public class SecurityConfig {
         return http
                 .csrf(AbstractHttpConfigurer::disable)
                 .authorizeHttpRequests(auth -> auth
-                        .requestMatchers("/api/v1/auth/**").permitAll()
-                        .requestMatchers(HttpMethod.GET, "/api/v1/doctor/**").hasAnyRole("DOCTOR", "PATIENT")
-                        .requestMatchers("/api/v1/doctor/**").hasRole("DOCTOR")
-                        .requestMatchers("/api/v1/patient/**").hasRole("PATIENT")
-                        .requestMatchers(HttpMethod.POST, "/api/v1/blog/**").hasRole("DOCTOR")
-                        .requestMatchers(HttpMethod.PUT, "/api/v1/blog/**").hasRole("DOCTOR")
-                        .requestMatchers(HttpMethod.DELETE, "/api/v1/blog/**").hasRole("DOCTOR")
-                        .requestMatchers(HttpMethod.GET, "/api/v1/blog/**").hasAnyRole("DOCTOR", "PATIENT")
-                        .requestMatchers("/api/v1/comment/**").hasAnyRole("DOCTOR", "PATIENT")
-                        .requestMatchers("/api/v1/like/**").hasAnyRole("DOCTOR", "PATIENT")
+                        .requestMatchers("auth/**").permitAll()
+                        .requestMatchers(HttpMethod.GET, "doctor/**").hasAnyRole("DOCTOR", "PATIENT")
+                        .requestMatchers("doctor/**").hasRole("DOCTOR")
+                        .requestMatchers("patient/**").hasRole("PATIENT")
+                        .requestMatchers(HttpMethod.POST, "blog/**").hasRole("DOCTOR")
+                        .requestMatchers(HttpMethod.PUT, "blog/**").hasRole("DOCTOR")
+                        .requestMatchers(HttpMethod.DELETE, "blog/**").hasRole("DOCTOR")
+                        .requestMatchers(HttpMethod.GET, "blog/**").hasAnyRole("DOCTOR", "PATIENT")
+                        .requestMatchers("comment/**").hasAnyRole("DOCTOR", "PATIENT")
+                        .requestMatchers("like/**").hasAnyRole("DOCTOR", "PATIENT")
                         .anyRequest().authenticated()
                 )
                 .sessionManagement(session ->

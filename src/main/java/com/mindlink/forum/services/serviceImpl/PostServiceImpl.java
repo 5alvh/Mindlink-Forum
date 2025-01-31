@@ -1,5 +1,8 @@
 package com.mindlink.forum.services.serviceImpl;
 
+import com.mindlink.forum.exception.postException.PostDeletionException;
+import com.mindlink.forum.exception.postException.PostUpdateException;
+import com.mindlink.forum.exception.postException.UserNotFoundException;
 import com.mindlink.forum.models.dtos.PostDtos.PostCreateDto;
 import com.mindlink.forum.models.dtos.PostDtos.PostGetDto;
 import com.mindlink.forum.models.dtos.PostDtos.PostUpdateDto;
@@ -46,7 +49,7 @@ public class PostServiceImpl implements PostService {
     @Override
     public PostGetDto createPost(PostCreateDto post) {
         User user = userRepository.findById(post.getUserId())
-                .orElseThrow(() -> new RuntimeException("User not found with id: " + post.getUserId()));
+                .orElseThrow(() -> new UserNotFoundException(post.getUserId()));
 
         Post pst = new Post();
         pst.setTitle(post.getTitle());
@@ -68,12 +71,17 @@ public class PostServiceImpl implements PostService {
             postToUpdate.setContent(post.getContent());
             postToUpdate.setCategoria(post.getCategoria());
             return toPostGetDto(postRepository.save(postToUpdate));
+        }else{
+            throw new PostUpdateException(postId);
         }
-        return null;
+
     }
 
     @Override
     public void deletePost(Long postId) {
+        if(!postRepository.existsById(postId)){
+            throw new PostDeletionException(postId);
+        }
         postRepository.deleteById(postId);
     }
 

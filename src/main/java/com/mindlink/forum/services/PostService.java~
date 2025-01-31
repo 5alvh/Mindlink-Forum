@@ -12,4 +12,7 @@ public interface PostService {
     void deletePost(Long postId);
     List<PostGetDto> getAllPosts();
     PostGetDto getPostById(Long postId);
+    //void likePost(Long postId, Long userId);
+    //void commentPost(Long postId, Long userId, String content);
+    //UserDto getPostCreator(Long postId);
 }
