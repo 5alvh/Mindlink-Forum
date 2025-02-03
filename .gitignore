@@ -5,6 +5,7 @@ target/
 !**/src/test/**/target/
 
 ### STS ###
+.java~
 .apt_generated
 .classpath
 .factorypath

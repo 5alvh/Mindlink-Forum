@@ -7,7 +7,7 @@ public class UserNotFoundException extends RuntimeException {
         super("User not found with ID: " + userId);
         this.userId = userId;
     }
-    
+
     public Long getUserId() {
         return userId;
     }

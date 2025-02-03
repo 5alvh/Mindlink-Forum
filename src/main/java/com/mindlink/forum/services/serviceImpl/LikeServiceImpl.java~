@@ -57,9 +57,9 @@ public class LikeServiceImpl implements LikeService {
 
     @Override
     public List<LikeGetDto> getLikesForPost(Long postId) {
-
+        
         if (postRepository.existsById(postId)){
-            throw new PostNotFoundException(postId);
+            return new PostNotFoundException(postId);
         }
         return likeRepository.findAll().stream()
                 .filter(like -> like.getPost().getId().equals(postId))

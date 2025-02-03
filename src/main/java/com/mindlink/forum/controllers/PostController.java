@@ -2,6 +2,7 @@ package com.mindlink.forum.controllers;
 
 import java.util.List;
 
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -31,7 +32,7 @@ public class PostController {
     }
 
     @PostMapping("/createPost")
-    public ResponseEntity<PostGetDto> createPost(@RequestBody PostCreateDto postDto) {
+    public ResponseEntity<PostGetDto> createPost(@Valid @RequestBody PostCreateDto postDto) {
         PostGetDto createdPost = postService.createPost(postDto);
         return ResponseEntity.status(HttpStatus.CREATED).body(createdPost);
     }
@@ -49,7 +50,7 @@ public class PostController {
     }
 
     @PutMapping("/{postId}")
-    public ResponseEntity<PostGetDto> updatePost(@PathVariable Long postId, @RequestBody PostUpdateDto postDto) {
+    public ResponseEntity<PostGetDto> updatePost(@PathVariable Long postId, @Valid @RequestBody PostUpdateDto postDto) {
         PostGetDto updatedPost = postService.updatePost(postId, postDto);
         return ResponseEntity.ok().body(updatedPost);
     }

@@ -19,7 +19,7 @@ public class CommentCreateDto {
     private Long postId;
 
     @NotNull(message = "User ID is required")
-    @Positive(message = "User ID must be greater than 0")
+    @Positive(message = "Post ID must be greater than 0")
     private Long userId;
 
 }

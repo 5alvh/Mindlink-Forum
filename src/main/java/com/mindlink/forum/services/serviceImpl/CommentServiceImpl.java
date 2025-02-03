@@ -5,6 +5,10 @@ import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
+import com.mindlink.forum.exception.UserNotFoundException;
+import com.mindlink.forum.exception.commentException.CommentDeletionException;
+import com.mindlink.forum.exception.commentException.CommentNotFoundException;
+import com.mindlink.forum.exception.postException.PostNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -50,11 +54,12 @@ public class CommentServiceImpl implements CommentService {
     @Override
     @Transactional
     public CommentGetDto createComment(CommentCreateDto commentDto) {
+
         Post post = postRepository.findById(commentDto.getPostId())
-                .orElseThrow(() -> new IllegalArgumentException("Post not found"));
+                .orElseThrow(() -> new PostNotFoundException(commentDto.getPostId()));
 
         User user = userRepository.findById(commentDto.getUserId())
-                .orElseThrow(() -> new IllegalArgumentException("User not found"));
+                .orElseThrow(() -> new UserNotFoundException(commentDto.getUserId()));
 
         Comment comment = new Comment();
         comment.setContent(commentDto.getContent());
@@ -70,7 +75,7 @@ public class CommentServiceImpl implements CommentService {
     public CommentGetDto getCommentById(Long id) {
         return commentRepository.findById(id)
                 .map(this::toCommentGetDto)
-                .orElseThrow(() -> new IllegalArgumentException("Comment not found with ID: " + id));
+                .orElseThrow(() -> new CommentNotFoundException(id));
     }
 
     @Override
@@ -81,11 +86,20 @@ public class CommentServiceImpl implements CommentService {
     @Transactional
     @Override
     public CommentGetDto updateComment(Long id, CommentUpdateDto commentDto) {
+
+        Post post = postRepository.findById(commentDto.getPostId())
+                .orElseThrow(() -> new PostNotFoundException(commentDto.getPostId()));
+
+        User user = userRepository.findById(commentDto.getUserId())
+                .orElseThrow(() -> new UserNotFoundException(commentDto.getUserId()));
+
         Comment comment = commentRepository.findById(id)
-                .orElseThrow(() -> new IllegalArgumentException("Comment not found"));
+                .orElseThrow(() -> new CommentNotFoundException(id));
 
         comment.setContent(commentDto.getContent());
+
         Comment updatedComment = commentRepository.save(comment);
+
         return toCommentGetDto(updatedComment);
     }
 
@@ -93,7 +107,7 @@ public class CommentServiceImpl implements CommentService {
     @Transactional
     public void deleteComment(Long id) {
         if (!commentRepository.existsById(id)) {
-            throw new IllegalArgumentException("Comment not found");
+            throw new CommentDeletionException(id);
         }
         commentRepository.deleteById(id);
     }

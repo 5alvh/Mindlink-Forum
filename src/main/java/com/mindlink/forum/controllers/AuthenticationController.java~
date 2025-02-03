@@ -5,7 +5,7 @@ import com.mindlink.forum.models.user.userDtos.LoginRequest;
 import com.mindlink.forum.models.user.userDtos.PatientRegistrationRequest;
 import com.mindlink.forum.repositories.UserRepository;
 import com.mindlink.forum.services.serviceImpl.UserServiceImpl;
-import com.mindlink.forum.utils.ResponsDtos.AuthResponse;
+import com.mindlink.forum.utils.AuthResponse;
 import com.mindlink.forum.utils.JwtService;
 import jakarta.validation.Valid;
 import org.springframework.http.ResponseEntity;

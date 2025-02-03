@@ -29,8 +29,6 @@ public class Comment {
     @Column(name = "fecha_actualizacion")
     private LocalDate fechaActualizacion;
 
-    @Column(name = "fecha_borrado")
-    private LocalDate fechaBorrado;
 
     @ManyToOne
     @JoinColumn(name = "post_id")

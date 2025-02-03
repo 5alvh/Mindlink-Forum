@@ -33,8 +33,6 @@ public class Post {
     @Column(name = "fecha_actualizacion")
     private LocalDateTime fechaActualizacion;
 
-    @Column(name = "fecha_borrado")
-    private LocalDateTime fechaBorrado;
 
     @Column(name = "categoria")
     private String categoria;

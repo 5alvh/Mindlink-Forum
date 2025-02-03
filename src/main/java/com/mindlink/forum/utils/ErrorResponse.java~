@@ -22,7 +22,7 @@ public class ErrorResponse {
         return statusCode;
     }
 
-    public LocalDateTime getTimestamp() {
+    public LocalDate getTimestamp() {
         return timestamp;
     }
 }
