@@ -1,7 +1,0 @@
-package com.mindlink.forum.exception;
-
-public class PostUpdateException extends RuntimeException {
-    public PostUpdateException(String message) {
-        super(message);
-    }
-}
